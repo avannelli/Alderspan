@@ -1,0 +1,36 @@
+:root {
+  --paper: #eeeee6;
+  --cream: #eeeee6;
+  --cream-deep: #e6e5da;
+  --ink: #252b25;
+  --green: #294b39;
+  --clay: #1b5f9c;
+  --clay-soft: #eaf3fd;
+  --mineral: #d9e2df;
+  --mineral-soft: #e6ece9;
+  --mineral-deep: #52706a;
+
+  /* Blue card theme */
+  --blue: #1b5f9c;
+  --blue-hover: #17537f;
+  --blue-light: #3d99e8;
+  --blue-deep: #1b5f9c;
+  --blue-ink: #0e3455;
+  --blue-tint: #eaf3fd;
+  --on-blue: #ffffff;
+  --on-blue-soft: rgba(255, 255, 255, 0.93);
+  --on-blue-line: rgba(255, 255, 255, 0.32);
+  --on-blue-fill: rgba(255, 255, 255, 0.18);
+
+  --project-blue: #1b5f9c;
+  --project-blue-strong: rgba(255, 255, 255, 0.18);
+  --project-blue-deep: #ffffff;
+
+  --card: #f5f4ed;
+  --heading: clamp(38px, 4.7vw, 72px);
+  --concrete: #b6bcaf;
+  --steel: #83918a;
+  --muted: #616a60;
+  --line: #c8ccc1;
+  --gutter: clamp(22px, 4.8vw, 86px);
+}
