@@ -1,3 +1,8 @@
+/**
+ * A cyanotype drafting sheet: blueprint ground, a fine grid over a coarse
+ * one, a border frame and a title block in the corner. Children draw with
+ * `currentColor`, which the sheet sets to the pale blueprint ink.
+ */
 function ArtFrame({
   id,
   label,
@@ -9,31 +14,108 @@ function ArtFrame({
   aria: string;
   children: React.ReactNode;
 }) {
+  const sheet = label.split("/")[0].trim();
   return (
-    <svg className="page-art" viewBox="0 0 900 400" role="img" aria-label={aria}>
+    <svg
+      className="page-art"
+      viewBox="0 0 900 400"
+      role="img"
+      aria-label={aria}
+      preserveAspectRatio="xMidYMid meet"
+    >
       <defs>
-        <pattern id={id} width="36" height="36" patternUnits="userSpaceOnUse">
+        <pattern
+          id={`${id}-fine`}
+          width="12"
+          height="12"
+          patternUnits="userSpaceOnUse"
+        >
           <path
-            d="M36 0H0V36"
+            d="M12 0H0V12"
             fill="none"
             stroke="currentColor"
-            strokeWidth=".4"
-            opacity=".18"
+            strokeWidth=".3"
+            opacity=".14"
+          />
+        </pattern>
+        <pattern
+          id={id}
+          width="60"
+          height="60"
+          patternUnits="userSpaceOnUse"
+        >
+          <rect width="60" height="60" fill={`url(#${id}-fine)`} />
+          <path
+            d="M60 0H0V60"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth=".6"
+            opacity=".3"
           />
         </pattern>
       </defs>
+
+      {/* Sheet */}
+      <rect width="900" height="400" fill="var(--bp-ground)" />
       <rect width="900" height="400" fill={`url(#${id})`} />
+
+      {/* Border frame, as drawn on a real sheet */}
+      <g fill="none" stroke="currentColor" opacity=".55">
+        <rect x="10" y="10" width="880" height="380" strokeWidth="1.4" />
+        <rect x="17" y="17" width="866" height="366" strokeWidth=".5" />
+      </g>
+
       {children}
+
+      {/* Title block */}
+      <g>
+        <rect
+          x="620"
+          y="318"
+          width="270"
+          height="72"
+          fill="var(--bp-ground)"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          opacity=".97"
+        />
+        <g fill="none" stroke="currentColor" strokeWidth=".6" opacity=".6">
+          <path d="M620 342h270M620 366h270M760 366v24M815 366v24" />
+        </g>
+        <g
+          fill="currentColor"
+          fontFamily="var(--font-mono, monospace)"
+          fontSize="9"
+          letterSpacing="1.6"
+        >
+          <text x="630" y="335" fontSize="10">
+            ALDERSPAN ENGINEERING
+          </text>
+          <text x="630" y="359" opacity=".85">
+            {sheet}
+          </text>
+          <text x="630" y="382" opacity=".7">
+            SCALE NTS
+          </text>
+          <text x="770" y="382" opacity=".7">
+            REV A
+          </text>
+          <text x="825" y="382" opacity=".7">
+            SHT 1/1
+          </text>
+        </g>
+      </g>
+
       <g
         fill="currentColor"
-        fontFamily="monospace"
+        fontFamily="var(--font-mono, monospace)"
         fontSize="10"
         letterSpacing="2"
       >
-        <text x="8" y="24">
+        <text x="28" y="38">
           {label}
         </text>
-        <text x="620" y="392">
+        <text x="28" y="382" fontSize="9" opacity=".7">
           CONCEPT ONLY / NOT FOR CONSTRUCTION
         </text>
       </g>

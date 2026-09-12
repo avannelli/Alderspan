@@ -1,36 +1,86 @@
 :root {
-  --paper: #eeeee6;
-  --cream: #eeeee6;
-  --cream-deep: #e6e5da;
-  --ink: #252b25;
-  --green: #294b39;
-  --clay: #1b5f9c;
-  --clay-soft: #eaf3fd;
-  --mineral: #d9e2df;
-  --mineral-soft: #e6ece9;
-  --mineral-deep: #52706a;
+  /* ── Type ──────────────────────────────────────────────────
+     Space Grotesk draws the headlines — a grotesk with drafted,
+     slightly mechanical letterforms. IBM Plex Sans carries the
+     reading text, IBM Plex Mono the drawing labels and micro type. */
+  --font-display: "Space Grotesk", "Inter", system-ui, -apple-system,
+    "Segoe UI", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Inter", system-ui, -apple-system, "Segoe UI",
+    Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", "Courier New",
+    monospace;
 
-  /* Blue card theme */
-  --blue: #1b5f9c;
-  --blue-hover: #17537f;
-  --blue-light: #3d99e8;
-  --blue-deep: #1b5f9c;
-  --blue-ink: #0e3455;
-  --blue-tint: #eaf3fd;
-  --on-blue: #ffffff;
-  --on-blue-soft: rgba(255, 255, 255, 0.93);
-  --on-blue-line: rgba(255, 255, 255, 0.32);
-  --on-blue-fill: rgba(255, 255, 255, 0.18);
+  /* ── Palette ───────────────────────────────────────────────
+     A dark practice. Two colours carry the site:
+       PETROL  — deep teal-green. Structure, weight, seriousness.
+       COPPER  — weathering-steel oxide. Warmth, emphasis, life.
+     Neutrals are near-black petrol, so the dark never reads grey. */
 
-  --project-blue: #1b5f9c;
-  --project-blue-strong: rgba(255, 255, 255, 0.18);
-  --project-blue-deep: #ffffff;
+  /* Petrol — primary */
+  --petrol: #1a6b6b;
+  --petrol-hover: #21807f;
+  --petrol-deep: #12494b;
+  --petrol-ink: #0b2e30;
+  --petrol-light: #6fc3bd;
+  --petrol-tint: #12262a;
+  --petrol-soft: #1c3a3d;
 
-  --card: #f5f4ed;
+  /* Copper — accent. Lifted for legibility against the dark ground. */
+  --copper: #d9763c;
+  --copper-deep: #b85d28;
+  --copper-light: #efa06a;
+  --copper-tint: #2a1a11;
+
+  /* Neutrals — surfaces, darkest first */
+  --paper: #0b1416;
+  --stone: #0e1a1c;
+  --paper-warm: #122024;
+  --card: #16262a;
+  --surface-raised: #1a2d31;
+
+  /* Text */
+  --ink: #e8f0ee;
+  --muted: #9bb0ac;
+  --steel: #7d9490;
+  --concrete: #5f7571;
+  --line: #223539;
+  --line-soft: #1a2b2e;
+
+  /* Blueprint sheet — a genuine cyanotype blue, not the brand petrol */
+  --bp-ground: #0f3b78;
+  --bp-ground-deep: #0a2b58;
+  --bp-ground-lift: #17559f;
+  --bp-ink: #d8e8ff;
+
+  /* Legacy aliases — kept so older rules resolve to the new palette */
+  --green: var(--petrol);
+  --clay: var(--copper);
+  --clay-soft: var(--copper-tint);
+  --cream: var(--stone);
+  --mineral: var(--petrol-soft);
+
+  /* On-petrol surfaces */
+  --on-petrol: #ffffff;
+  --on-petrol-soft: rgba(255, 255, 255, 0.82);
+  --on-petrol-line: rgba(255, 255, 255, 0.22);
+  --on-petrol-fill: rgba(255, 255, 255, 0.1);
+
+  /* Channels, for building translucent layers */
+  --petrol-rgb: 26, 107, 107;
+  --copper-rgb: 217, 118, 60;
+  --ink-rgb: 232, 240, 238;
+
+  /* Elevation — on a dark ground, depth comes from a cast shadow plus a
+     lit top edge, so surfaces read as raised rather than merely darker. */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.45), 0 14px 32px rgba(0, 0, 0, 0.42);
+  --shadow-lg: 0 6px 14px rgba(0, 0, 0, 0.45), 0 34px 70px rgba(0, 0, 0, 0.55);
+  --shadow-petrol: 0 3px 10px rgba(0, 0, 0, 0.45),
+    0 22px 48px rgba(0, 0, 0, 0.48);
+  --shadow-petrol-lift: 0 8px 18px rgba(0, 0, 0, 0.5),
+    0 42px 84px rgba(0, 0, 0, 0.6);
+  --edge-lit: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
   --heading: clamp(38px, 4.7vw, 72px);
-  --concrete: #b6bcaf;
-  --steel: #83918a;
-  --muted: #616a60;
-  --line: #c8ccc1;
   --gutter: clamp(22px, 4.8vw, 86px);
 }

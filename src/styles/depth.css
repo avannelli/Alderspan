@@ -1,0 +1,528 @@
+/* ──────────────────────────────────────────────────────────────
+   Depth layer.
+   Loaded after global.css / cards-careers.css. Adds elevation,
+   light and material to the flat surfaces — it does not change
+   layout, only how things sit in space.
+   ────────────────────────────────────────────────────────────── */
+
+/* ── Hero ─────────────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 32px var(--gutter) 0;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+}
+.hero-backdrop {
+  position: absolute;
+  /* Starts at the very top of the hero box, which now runs up behind the
+     header. Horizontal bleed is clipped by the hero's own overflow. */
+  inset: 0 -10% 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Fade the whole backdrop out before the hero ends, so the washes
+     never meet the section boundary as a hard edge. */
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 62%,
+    transparent 96%
+  );
+  mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 96%);
+}
+/* Blueprint grid, fading out as it falls away from the eye */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(18, 73, 75, 0.07) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(18, 73, 75, 0.07) 1px, transparent 1px);
+  background-size: 58px 58px;
+  /* Centred high, so the ruling is present right at the top of the screen
+     and falls away toward the content below. */
+  -webkit-mask-image: radial-gradient(
+    125% 95% at 58% 16%,
+    #000 0%,
+    rgba(0, 0, 0, 0.6) 46%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(
+    125% 95% at 58% 16%,
+    #000 0%,
+    rgba(0, 0, 0, 0.6) 46%,
+    transparent 82%
+  );
+}
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+}
+.hero-glow-petrol {
+  top: 6%;
+  right: -4%;
+  width: 46vw;
+  height: 46vw;
+  max-width: 720px;
+  max-height: 720px;
+  background: radial-gradient(
+    circle,
+    rgba(18, 73, 75, 0.2),
+    transparent 68%
+  );
+}
+.hero-glow-copper {
+  bottom: -14%;
+  left: -6%;
+  width: 34vw;
+  height: 34vw;
+  max-width: 520px;
+  max-height: 520px;
+  background: radial-gradient(
+    circle,
+    rgba(189, 95, 44, 0.16),
+    transparent 68%
+  );
+}
+
+/* Eyebrow becomes a raised chip rather than loose text */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 15px 8px 13px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(18, 73, 75, 0.1);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px) saturate(1.25);
+  color: var(--muted);
+}
+.status-dot {
+  background: var(--copper);
+  box-shadow: 0 0 0 3px rgba(189, 95, 44, 0.16);
+}
+.hero-note {
+  color: var(--steel);
+}
+
+/* The headline: ink body, copper payoff line, drawn rule */
+.hero h1 {
+  margin-top: 46px;
+  color: var(--ink);
+}
+.hero h1 > span {
+  position: relative;
+  display: inline-block;
+  color: var(--copper);
+}
+.hero h1 > span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* Clear of the descenders — this is a rule under the line, not an
+     underline through it. */
+  bottom: -0.04em;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--copper), rgba(189, 95, 44, 0));
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: rule-in 1.1s cubic-bezier(0.22, 0.8, 0.24, 1) 0.35s forwards;
+}
+@keyframes rule-in {
+  to {
+    transform: scaleX(1);
+  }
+}
+.hero-lede {
+  margin: 26px 0 32px;
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+/* Hero buttons */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.button-primary,
+.button-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.25s cubic-bezier(0.22, 0.8, 0.24, 1),
+    box-shadow 0.25s, background 0.25s, color 0.25s, border-color 0.25s;
+}
+.button-primary {
+  background: linear-gradient(150deg, var(--petrol), var(--petrol-deep));
+  color: var(--on-petrol);
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-petrol);
+}
+.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-petrol-lift);
+}
+.button-primary span {
+  transition: transform 0.25s;
+}
+.button-primary:hover span {
+  transform: translate(3px, -3px);
+}
+.button-ghost {
+  color: var(--petrol-deep);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(18, 73, 75, 0.18);
+}
+.button-ghost:hover {
+  background: #ffffff;
+  border-color: rgba(18, 73, 75, 0.34);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* The drawing sits on a raised plate, not flat on the page */
+.hero-art {
+  position: relative;
+  padding: 18px;
+  border-radius: 6px;
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.94),
+    rgba(255, 255, 255, 0.58)
+  );
+  border: 1px solid rgba(18, 73, 75, 0.1);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(6px);
+}
+.hero-art::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(18, 73, 75, 0.08);
+  border-radius: 3px;
+  pointer-events: none;
+}
+.page-art {
+  color: var(--petrol);
+  opacity: 1;
+}
+
+/* Specimen rail under the hero */
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin: 40px 0 0;
+  padding: 22px 0 4px;
+  border-top: 1px solid var(--line);
+  max-width: 620px;
+}
+.hero-meta div {
+  position: relative;
+  padding-left: 14px;
+}
+.hero-meta div::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 2px;
+  height: 12px;
+  background: var(--copper);
+  border-radius: 2px;
+}
+.hero-meta dt {
+  color: var(--steel);
+}
+.hero-meta dd {
+  margin: 8px 0 0;
+  font-size: 19px;
+  letter-spacing: -0.035em;
+}
+
+/* ── Section labels get a copper tick ─────────────────────── */
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--petrol-deep);
+}
+.section-label::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--copper);
+  flex-shrink: 0;
+}
+.careers-preview > .section-label::before,
+.contact-strip .section-label::before {
+  background: var(--copper-light);
+}
+
+/* ── Surfaces ─────────────────────────────────────────────── */
+
+.expertise-section {
+  background: linear-gradient(180deg, #ffffff, var(--card));
+  border-top: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.expertise-row {
+  padding-left: 14px;
+  padding-right: 14px;
+  border-radius: 4px;
+  transition: color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.expertise-row:hover {
+  color: var(--petrol-deep);
+  background: linear-gradient(
+    90deg,
+    rgba(189, 95, 44, 0.06),
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: translateX(4px);
+}
+.expertise-row .row-arrow {
+  color: var(--copper);
+}
+
+.practice {
+  background: linear-gradient(180deg, var(--paper), var(--stone));
+}
+.stats > div {
+  position: relative;
+  border-top: 2px solid rgba(18, 73, 75, 0.14);
+}
+.stats > div::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 34px;
+  height: 2px;
+  background: var(--copper);
+}
+.stats > div > span {
+  display: block;
+  background: linear-gradient(160deg, var(--petrol), var(--petrol-ink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.stats p {
+  color: var(--muted);
+}
+
+.process {
+  background: linear-gradient(180deg, var(--card), #ffffff);
+  border-top: 1px solid var(--line);
+}
+.process li {
+  position: relative;
+  border-top: 2px solid rgba(18, 73, 75, 0.14);
+}
+.process li::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 26px;
+  height: 2px;
+  background: var(--copper);
+}
+.process li span {
+  color: var(--copper-deep);
+}
+.technical-diagram {
+  color: var(--petrol);
+}
+
+/* ── Project cards ────────────────────────────────────────── */
+
+.project-feature {
+  position: relative;
+  background: linear-gradient(158deg, var(--petrol), var(--petrol-deep) 82%);
+  border-radius: 6px;
+  box-shadow: var(--shadow-petrol);
+  transition: box-shadow 0.35s ease, background 0.35s ease;
+}
+.project-feature::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+/* Cards gain depth on hover through light, not movement: the card's
+   footprint is asserted to stay put (tests/site.spec.ts). */
+/* Hover changes depth, never colour — the card keeps its sheet. */
+.project-feature:hover {
+  box-shadow: var(--shadow-petrol-lift);
+}
+.project-feature:hover::after {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.project-image {
+  background: var(--petrol-ink);
+}
+.project-index {
+  background: var(--copper);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(189, 95, 44, 0.4);
+}
+.image-arrow {
+  background: var(--copper);
+  color: #ffffff;
+}
+.card-bottom b {
+  background: var(--copper);
+  color: #ffffff;
+}
+.focus-tags span {
+  background: var(--on-petrol-fill);
+  border-color: var(--on-petrol-line);
+}
+
+/* ── Filters ──────────────────────────────────────────────── */
+
+.filters {
+  box-shadow: var(--shadow-sm);
+}
+.filters button.active {
+  background: linear-gradient(150deg, var(--petrol), var(--petrol-deep));
+  box-shadow: 0 4px 12px rgba(18, 73, 75, 0.3);
+}
+
+/* ── Dark strips ──────────────────────────────────────────── */
+
+.careers-preview,
+.contact-strip {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.careers-preview {
+  background: linear-gradient(150deg, var(--petrol), var(--petrol-deep));
+}
+.contact-strip {
+  background: linear-gradient(150deg, var(--petrol-deep), var(--petrol-ink));
+}
+.careers-preview::before,
+.contact-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 58px 58px;
+  -webkit-mask-image: radial-gradient(
+    90% 120% at 82% 0%,
+    #000,
+    transparent 70%
+  );
+  mask-image: radial-gradient(90% 120% at 82% 0%, #000, transparent 70%);
+}
+.careers-preview::after,
+.contact-strip::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--copper) 0%,
+    rgba(189, 95, 44, 0.25) 38%,
+    transparent 72%
+  );
+}
+.contact-strip > a:hover {
+  color: var(--copper-light);
+}
+.careers-preview .text-link:hover {
+  background: var(--copper);
+  color: #ffffff;
+  border-color: var(--copper);
+}
+
+footer {
+  background: linear-gradient(180deg, var(--petrol-tint), var(--stone));
+  border-top: 1px solid var(--line);
+}
+
+/* ── Reveal on scroll ─────────────────────────────────────── */
+
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.reveal-ready [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.7s cubic-bezier(0.22, 0.8, 0.24, 1),
+    transform 0.7s cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  .hero h1 > span::after {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
+
+/* ── Narrow screens ───────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .hero-art {
+    padding: 12px;
+  }
+  .hero-meta {
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .hero-meta dd {
+    font-size: 16px;
+  }
+}
+@media (max-width: 620px) {
+  .hero-actions {
+    gap: 9px;
+  }
+  .button-primary,
+  .button-ghost {
+    padding: 13px 18px;
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+  .hero-meta div {
+    padding-left: 10px;
+  }
+}

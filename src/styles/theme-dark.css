@@ -1,0 +1,717 @@
+/* ──────────────────────────────────────────────────────────────
+   Dark theme + type.
+   Loads last. Everything above it was written for a light ground;
+   this file re-seats those surfaces on the dark one and sets the
+   typeface system. It also styles the rolled-out blueprint.
+   ────────────────────────────────────────────────────────────── */
+
+/* ── Type ─────────────────────────────────────────────────── */
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  letter-spacing: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+h1,
+h2,
+h3,
+.wordmark,
+.stats > div > span,
+.hero-meta dd,
+.contact-strip > a,
+.footer-top p,
+.section-top > p:not(.section-label) {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+h1 {
+  letter-spacing: -0.045em;
+}
+h2 {
+  letter-spacing: -0.035em;
+}
+.micro,
+.section-label,
+.filters button,
+.nav a,
+.button-primary,
+.button-ghost,
+.card-kicker,
+.project-byline,
+.submit-button,
+.apply-button,
+.text-link {
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+.section-label {
+  font-weight: 500;
+  letter-spacing: 0.14em;
+}
+.micro {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+.wordmark {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.wordmark > span {
+  font-family: var(--font-mono);
+  letter-spacing: 0.3em;
+}
+p {
+  line-height: 1.7;
+}
+
+/* ── Global ground ────────────────────────────────────────── */
+
+::selection {
+  background: var(--copper);
+  color: #ffffff;
+}
+:focus-visible {
+  outline: 2px solid var(--copper-light);
+  outline-offset: 5px;
+}
+.logo {
+  color: var(--ink);
+}
+.intro-active .intro-screen {
+  background: var(--paper);
+}
+
+/* ── Navigation ───────────────────────────────────────────── */
+
+.nav {
+  background: rgba(14, 26, 28, 0.62);
+  border-color: rgba(255, 255, 255, 0.09);
+  box-shadow: var(--shadow-sm);
+}
+.nav.stuck {
+  background: rgba(11, 20, 22, 0.92);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: var(--shadow-md);
+}
+.nav a {
+  color: var(--muted);
+}
+.nav a:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.06);
+}
+.nav a.active {
+  color: #ffffff;
+  background: var(--petrol);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+.menu-toggle {
+  color: var(--ink);
+}
+
+/* ── Lattice ──────────────────────────────────────────────── */
+
+/* The drafting lattice the sheets and cards are ruled with, carried onto
+   the pages themselves: a coarse grid over a fine one, painted behind the
+   content and faded out so it never competes with type. One definition,
+   reused everywhere — change it here and every surface follows. */
+.lattice,
+.hero-grid,
+.page::before,
+.projects-showcase::before {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 58px 58px, 58px 58px, 14.5px 14.5px, 14.5px 14.5px;
+}
+
+/* Every inner page carries it behind the masthead and title, fading out
+   before the body copy begins. */
+.page {
+  position: relative;
+  isolation: isolate;
+}
+.page::before,
+.projects-showcase::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  /* .page spans the full width and holds the gutter as padding, so the
+     panel runs edge to edge with no bleed. */
+  inset: -110px 0 auto;
+  height: 620px;
+  -webkit-mask-image: radial-gradient(
+    120% 100% at 50% 0%,
+    #000 0%,
+    rgba(0, 0, 0, 0.45) 45%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(
+    120% 100% at 50% 0%,
+    #000 0%,
+    rgba(0, 0, 0, 0.45) 45%,
+    transparent 82%
+  );
+}
+
+/* On the home page the projects section gets its own panel of it, so the
+   cards sit on ruled ground rather than floating on bare dark. */
+.projects-showcase {
+  position: relative;
+  isolation: isolate;
+}
+/* Span the whole gallery rather than a fixed band at the top — a short
+   panel left the lattice hovering above the cards. It fades in under the
+   label and out past the last row. */
+.projects-showcase::before {
+  inset: 0 calc(var(--gutter) * -1);
+  height: auto;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 7%,
+    #000 78%,
+    transparent 99%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 7%,
+    #000 78%,
+    transparent 99%
+  );
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.hero-glow-petrol {
+  background: radial-gradient(
+    circle,
+    rgba(26, 107, 107, 0.3),
+    transparent 68%
+  );
+}
+.hero-glow-copper {
+  background: radial-gradient(
+    circle,
+    rgba(217, 118, 60, 0.18),
+    transparent 68%
+  );
+}
+.hero-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-sm), var(--edge-lit);
+  color: var(--muted);
+}
+.hero h1 {
+  color: var(--ink);
+}
+.hero h1 > span {
+  color: var(--copper-light);
+}
+.hero h1 > span::after {
+  background: linear-gradient(
+    90deg,
+    var(--copper-light),
+    rgba(217, 118, 60, 0)
+  );
+}
+.button-ghost {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.button-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.26);
+  color: #ffffff;
+}
+.button-primary {
+  background: linear-gradient(150deg, var(--petrol), var(--petrol-deep));
+  box-shadow: var(--shadow-petrol), var(--edge-lit);
+}
+
+/* ── The rolled-out blueprint ─────────────────────────────── */
+
+.blueprint {
+  position: relative;
+  padding: 11px 0;
+}
+/* The sheet itself: a shallow cylinder of light across the paper, as if
+   it has just been unrolled and has not gone flat yet. */
+.blueprint-sheet {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--bp-ground-deep) 0%,
+    var(--bp-ground) 14%,
+    var(--bp-ground-lift) 48%,
+    var(--bp-ground) 84%,
+    var(--bp-ground-deep) 100%
+  );
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55),
+    0 42px 90px rgba(0, 0, 0, 0.45), inset 0 0 60px rgba(0, 0, 0, 0.28);
+}
+/* Cross-sheet shading, so the curvature reads left-to-right too */
+.blueprint-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0) 12%,
+    rgba(255, 255, 255, 0.05) 46%,
+    rgba(0, 0, 0, 0) 88%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+.blueprint .page-art {
+  position: relative;
+  z-index: 1;
+  color: var(--bp-ink);
+  opacity: 1;
+}
+
+/* The curled lips at the head and foot of the roll. Each is an ellipse
+   segment that tapers in from the sheet's edges and turns away from the
+   light, so the paper reads as still holding the curve of the tube. */
+.blueprint-curl {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  height: 13px;
+  z-index: 0;
+  pointer-events: none;
+}
+.blueprint-curl-top {
+  top: 0;
+  background: linear-gradient(
+    180deg,
+    #061c3c 0%,
+    var(--bp-ground-deep) 55%,
+    var(--bp-ground) 100%
+  );
+  border-radius: 60% 60% 0 0 / 13px 13px 0 0;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.55);
+}
+.blueprint-curl-bottom {
+  bottom: 0;
+  background: linear-gradient(
+    0deg,
+    #061c3c 0%,
+    var(--bp-ground-deep) 55%,
+    var(--bp-ground) 100%
+  );
+  border-radius: 0 0 60% 60% / 0 0 13px 13px;
+  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.55),
+    0 10px 22px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Sheets elsewhere on the site ─────────────────────────── */
+
+.page-art {
+  color: var(--bp-ink);
+  opacity: 1;
+  border-radius: 2px;
+  box-shadow: var(--shadow-md);
+}
+.technical-diagram {
+  color: var(--petrol-light);
+  opacity: 0.9;
+}
+
+/* ── Sections ─────────────────────────────────────────────── */
+
+.section {
+  border-top-color: var(--line);
+}
+.expertise-section {
+  background: linear-gradient(180deg, var(--paper-warm), var(--stone));
+  border-top: 1px solid var(--line);
+  box-shadow: var(--edge-lit);
+}
+.expertise-section > .section-label,
+.practice > .section-label {
+  color: var(--petrol-light);
+}
+.expertise-row,
+.expertise-section .expertise-row {
+  border-top-color: var(--line);
+}
+.expertise-row:last-child,
+.expertise-section .expertise-row:last-child {
+  border-bottom-color: var(--line);
+}
+.expertise-row:hover {
+  color: var(--ink);
+  background: linear-gradient(
+    90deg,
+    rgba(217, 118, 60, 0.1),
+    rgba(255, 255, 255, 0) 70%
+  );
+}
+.expertise-row p {
+  color: var(--muted);
+}
+
+.practice {
+  background: linear-gradient(180deg, var(--stone), var(--paper));
+}
+.stats > div {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+/* The clipped gradient has to run light-on-dark here, or the numerals
+   vanish into the ground. */
+.stats > div > span {
+  background: linear-gradient(160deg, #ffffff, var(--petrol-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.process {
+  background: linear-gradient(180deg, var(--paper-warm), var(--stone));
+  border-top: 1px solid var(--line);
+}
+.process li {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+.process li span {
+  color: var(--copper);
+}
+
+/* ── Cards, filters, links ────────────────────────────────── */
+
+/* Project cards are drafting sheets too: blueprint ground under the same
+   two-tier grid the drawings use, so a card and a drawing read as the
+   same object. */
+.project-feature {
+  background-color: var(--bp-ground-deep);
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(158deg, var(--bp-ground) 0%, var(--bp-ground-deep) 88%);
+  background-size: 48px 48px, 48px 48px, 12px 12px, 12px 12px, 100% 100%;
+  box-shadow: var(--shadow-petrol), var(--edge-lit);
+}
+/* Hover deepens the shadow only — the sheet keeps its blueprint colour. */
+.project-feature:hover {
+  box-shadow: var(--shadow-petrol-lift), var(--edge-lit);
+}
+.project-image {
+  background: var(--bp-ground-deep);
+}
+.detail-hero {
+  border-radius: 2px;
+  box-shadow: var(--shadow-md);
+}
+.project-card-body {
+  color: var(--bp-ink);
+}
+.project-summary,
+.card-bottom {
+  color: rgba(226, 238, 255, 0.88);
+}
+.project-byline,
+.card-kicker,
+.project-heading h3 .micro {
+  color: rgba(216, 232, 255, 0.68);
+}
+.focus-tags span {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+.card-showcase,
+.card-bottom {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Rhythm ───────────────────────────────────────────────── */
+
+/* Bring the masthead down onto the content. The gap above a page title
+   was stacking four separate spaces — header margin, header height, the
+   page's top padding, and the intro's own margin — plus slack from the
+   intro being vertically centred in a 150px box. Each is trimmed rather
+   than one being collapsed. */
+.header {
+  height: 72px;
+  margin-top: 12px;
+}
+html {
+  scroll-padding-top: 92px;
+}
+.page {
+  padding-top: 22px;
+}
+.page-intro {
+  margin: 8px 0 40px;
+  min-height: 0;
+}
+.art-intro {
+  margin-bottom: 44px;
+}
+.project-detail {
+  padding-top: 12px;
+}
+/* Pull the hero up behind the masthead so its lattice reaches the top of
+   the screen, then give the padding back so the content sits where it did.
+   The header is a higher stacking layer, so it still paints over this.
+   72px header + 12px header margin = 84px. */
+.hero {
+  margin-top: -84px;
+  padding-top: 102px;
+}
+.hero h1 {
+  margin-top: 38px;
+}
+
+/* Close the gap between the hero rail and the projects that follow. */
+.hero-meta {
+  margin-top: 26px;
+  padding: 18px 0 0;
+}
+.projects-showcase {
+  margin-top: 26px;
+  padding-top: 22px;
+}
+.projects-showcase > .section-label {
+  margin-bottom: 26px;
+}
+.filters {
+  margin-bottom: 28px;
+}
+
+/* Take the height out of the cards: a wider crop and tighter interior. */
+.project-image img {
+  aspect-ratio: 2.5;
+}
+.project-card-body {
+  padding: 18px 20px 16px;
+}
+.project-summary {
+  margin: 11px 0 16px;
+  line-height: 1.5;
+}
+.project-byline {
+  margin-top: 8px;
+}
+.card-showcase {
+  padding-top: 12px;
+}
+.card-bottom {
+  margin-top: 13px;
+  padding-top: 11px;
+}
+.focus-tags span {
+  padding: 5px 9px;
+}
+.project-image {
+  background: var(--petrol-ink);
+}
+.filters {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-sm), var(--edge-lit);
+}
+.filters button {
+  color: var(--muted);
+}
+.filters button:hover:not(.active) {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.06);
+}
+.filters button.active {
+  color: #ffffff;
+  background: linear-gradient(150deg, var(--petrol), var(--petrol-deep));
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+.text-link:hover {
+  color: #ffffff;
+  background: var(--copper);
+  border-color: var(--copper);
+}
+.back-link:hover {
+  background: var(--copper);
+  border-color: var(--copper);
+  color: #ffffff;
+}
+
+/* ── Dark strips now sit lighter than the page ────────────── */
+
+.careers-preview {
+  background: linear-gradient(150deg, var(--petrol-deep), var(--petrol-ink));
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+.contact-strip {
+  background: linear-gradient(150deg, var(--petrol-ink), var(--stone));
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+
+footer {
+  background: linear-gradient(180deg, var(--stone), var(--paper));
+  border-top: 1px solid var(--line);
+}
+.footer-bottom {
+  border-top-color: var(--line);
+}
+
+/* ── Forms ────────────────────────────────────────────────── */
+
+input,
+select,
+textarea {
+  border-bottom-color: rgba(255, 255, 255, 0.18);
+  color: var(--ink);
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-bottom-color: var(--copper);
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--concrete);
+}
+select option {
+  background: var(--card);
+  color: var(--ink);
+}
+.submit-button,
+.apply-button {
+  background: var(--petrol);
+  border-color: var(--petrol);
+  box-shadow: var(--shadow-sm);
+}
+.submit-button:hover,
+.apply-button:hover {
+  background: var(--copper);
+  border-color: var(--copper);
+}
+.form-status {
+  color: var(--petrol-light);
+}
+.application-section form {
+  background: var(--card);
+  border-top-color: var(--copper);
+  box-shadow: var(--shadow-md), var(--edge-lit);
+}
+
+/* ── Careers ──────────────────────────────────────────────── */
+
+/* The page carried three competing headlines and four disclaimers; with
+   those gone the sections can sit closer and the rows get compact. */
+.career-benefits {
+  gap: 30px;
+  margin: 30px 0 44px;
+}
+.career-benefits article {
+  padding-top: 18px;
+}
+.career-benefits h3 {
+  font-size: 20px;
+  margin: 13px 0 10px;
+}
+.open-positions {
+  padding-top: 22px;
+}
+.positions-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+.vacancy-count {
+  color: var(--copper);
+}
+.job summary {
+  padding: 19px 12px;
+}
+.job summary h3 {
+  font-size: 20px;
+}
+.open-positions .fictional-note {
+  margin-top: 18px;
+}
+/* The left column is now much shorter than the form; centring it spreads
+   the leftover space either side instead of pooling it at the bottom. */
+.application-section {
+  margin-top: 52px;
+  padding-top: 26px;
+  align-items: center;
+  gap: 8%;
+}
+.application-section > div > h2 {
+  margin: 18px 0 16px;
+}
+.application-section form {
+  padding: 24px;
+}
+.application-section label {
+  margin: 16px 0;
+}
+
+/* ── Careers cards ────────────────────────────────────────── */
+
+.job-card,
+.careers-banner {
+  box-shadow: var(--shadow-md), var(--edge-lit);
+}
+/* These panels were tinted washes of the accent. At this value a copper
+   wash goes muddy, so they become petrol surfaces the accent sits on. */
+.careers-banner,
+.service-intro {
+  background: var(--paper-warm);
+  border-top-color: var(--copper);
+}
+.job summary:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.portrait-1 {
+  background: var(--petrol-soft);
+}
+.portrait-2 {
+  background: var(--card);
+}
+.hiring-process li {
+  border-top-color: var(--line);
+}
+.job,
+.job-card {
+  border-color: var(--line);
+}
+
+@media (max-width: 900px) {
+  .nav.stuck {
+    background: rgba(11, 20, 22, 0.96);
+  }
+  /* The narrow layout sets its own top spacing; trim it to match. */
+  .page {
+    padding-top: 16px;
+  }
+  .page-intro {
+    margin: 10px 0 32px;
+  }
+}

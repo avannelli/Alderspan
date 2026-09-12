@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArchArt } from "../components/PageArt";
+import { useReveal } from "../components/useReveal";
 import {
   ExpertiseIndex,
   ProjectGallery,
@@ -8,41 +9,81 @@ import {
   TechnicalDiagram,
 } from "../components/Editorial";
 export default function Home() {
+  useReveal();
   return (
     <>
       <section className="hero">
-        <div className="hero-top">
-          <span className="micro">
-            <i className="status-dot" /> Independent thinking. Lasting impact.
-          </span>
-          <span className="micro hero-note">
-            Structures / Infrastructure / Public realm
-          </span>
+        <div className="hero-backdrop" aria-hidden="true">
+          <span className="hero-grid" />
+          <span className="hero-glow hero-glow-petrol" />
+          <span className="hero-glow hero-glow-copper" />
         </div>
-        <div className="hero-main">
-          <div className="intro-copy">
-            <h1>
-              Engineering
-              <br />
-              <span>with consequence.</span>
-            </h1>
-            <p className="hero-lede">
-              We work across structures, infrastructure
-              <br className="desktop-break" /> and the public realm.
-            </p>
+        <div className="hero-inner">
+          <div className="hero-top">
+            <span className="micro hero-badge">
+              <i className="status-dot" /> Independent thinking. Lasting impact.
+            </span>
+            <span className="micro hero-note">
+              Structures / Infrastructure / Public realm
+            </span>
           </div>
-          <ArchArt />
+          <div className="hero-main">
+            <div className="intro-copy">
+              <h1>
+                Engineering
+                <br />
+                <span>with consequence.</span>
+              </h1>
+              <p className="hero-lede">
+                We work across structures, infrastructure
+                <br className="desktop-break" /> and the public realm.
+              </p>
+              <div className="hero-actions">
+                <Link className="button-primary" to="/projects">
+                  Selected work <span aria-hidden="true">↗</span>
+                </Link>
+                <Link className="button-ghost" to="/contact">
+                  Start a conversation
+                </Link>
+              </div>
+            </div>
+            <div className="blueprint" aria-hidden="false">
+              <span className="blueprint-curl blueprint-curl-top" />
+              <div className="blueprint-sheet">
+                <ArchArt />
+              </div>
+              <span className="blueprint-curl blueprint-curl-bottom" />
+            </div>
+          </div>
+          <dl className="hero-meta">
+            <div>
+              <dt className="micro">Founded</dt>
+              <dd>2011</dd>
+            </div>
+            <div>
+              <dt className="micro">Disciplines</dt>
+              <dd>Six</dd>
+            </div>
+            <div>
+              <dt className="micro">Practice</dt>
+              <dd>Independent</dd>
+            </div>
+          </dl>
         </div>
       </section>
-      <section id="selected-work" className="section selected projects-showcase">
+      <section
+        id="selected-work"
+        className="section selected projects-showcase"
+        data-reveal
+      >
         <SectionLabel>Projects</SectionLabel>
         <ProjectGallery />
       </section>
-      <section className="section expertise-section">
+      <section className="section expertise-section" data-reveal>
         <SectionLabel>Expertise</SectionLabel>
         <ExpertiseIndex />
       </section>
-      <section className="section practice">
+      <section className="section practice" data-reveal>
         <SectionLabel>About</SectionLabel>
         <div className="practice-copy">
           <p>
@@ -61,7 +102,7 @@ export default function Home() {
           concept.
         </p>
       </section>
-      <section className="section process">
+      <section className="section process" data-reveal>
         <div>
           <SectionLabel>Process</SectionLabel>
           <p>
@@ -80,7 +121,7 @@ export default function Home() {
         </div>
         <TechnicalDiagram />
       </section>
-      <section className="careers-preview">
+      <section className="careers-preview" data-reveal>
         <SectionLabel>Careers</SectionLabel>
         <div className="careers-preview-content">
           <p>
@@ -92,7 +133,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
-      <section className="contact-strip">
+      <section className="contact-strip" data-reveal>
         <SectionLabel>Contact</SectionLabel>
         <Link to="/contact">
           What could we build together? <span>↗</span>
